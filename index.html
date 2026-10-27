@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suivi Prob-Stat 4e</title>
+<meta name="robots" content="noindex">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --ink: #1d2433;
+    --muted: #667085;
+    --line: #e3e1da;
+    --head: #1f3864;
+    --head-ink: #ffffff;
+    --ok: #1e8e3e;
+    --ok-bg: #e6f4ea;
+    --wait: #7a5a00;
+    --wait-bg: #fff2cc;
+    --late: #b42318;
+    --late-bg: #fde8e6;
+    --tbd: #98a2b3;
+    --accent: #1f3864;
+    --focus: #3b6fd8;
+    --bar-bg: #1f3864; --bar-ink: #ffffff;
+    --shadow: 0 1px 2px rgba(16,24,40,.06), 0 1px 3px rgba(16,24,40,.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12151c; --surface: #1a1f2a; --ink: #e7e9ee; --muted: #9aa3b2; --line: #2c3342;
+      --head: #2a3f6b; --head-ink: #f2f4f8;
+      --ok: #5fd27e; --ok-bg: #173323; --wait: #f2cf6b; --wait-bg: #3a3014;
+      --late: #ff8a7a; --late-bg: #3d1b18; --tbd: #6b7487; --accent: #8fb0f0; --focus: #8fb0f0; --bar-bg: #2a3f6b; --bar-ink: #f2f4f8;
+      --shadow: 0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12151c; --surface: #1a1f2a; --ink: #e7e9ee; --muted: #9aa3b2; --line: #2c3342;
+    --head: #2a3f6b; --head-ink: #f2f4f8;
+    --ok: #5fd27e; --ok-bg: #173323; --wait: #f2cf6b; --wait-bg: #3a3014;
+    --late: #ff8a7a; --late-bg: #3d1b18; --tbd: #6b7487; --accent: #8fb0f0; --focus: #8fb0f0; --bar-bg: #2a3f6b; --bar-ink: #f2f4f8;
+    --shadow: 0 1px 2px rgba(0,0,0,.4);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  main { max-width: 1040px; margin: 0 auto; padding: 32px 16px 64px; }
+  header h1 { font-size: 1.55rem; line-height: 1.25; margin: 0 0 4px; letter-spacing: -0.01em; }
+  header .sub { color: var(--muted); margin: 0; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 18px 0 14px; font-size: .9rem; color: var(--muted); }
+  .meta strong { color: var(--ink); font-weight: 600; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: .85rem; color: var(--muted); margin-bottom: 14px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 10px; }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 760px; }
+  th, td { text-align: center; padding: 0; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+  th:last-child, td:last-child { border-right: 0; }
+  thead th {
+    background: var(--head); color: var(--head-ink); font-weight: 600; font-size: .82rem;
+    padding: 10px 8px; line-height: 1.25; vertical-align: middle;
+  }
+  thead th:first-child { border-top-left-radius: 10px; }
+  thead th:last-child { border-top-right-radius: 10px; }
+  tbody th, tfoot th {
+    text-align: left; padding: 9px 12px; font-weight: 600; white-space: nowrap;
+    position: sticky; left: 0; background: var(--surface); z-index: 1;
+  }
+  thead th:first-child { position: sticky; left: 0; z-index: 2; text-align: left; padding-left: 12px; }
+  tfoot th, tfoot td { background: color-mix(in srgb, var(--line) 45%, var(--surface)); font-weight: 600; font-size: .85rem; padding: 8px; border-bottom: 0; }
+  tfoot th { border-bottom-left-radius: 10px; }
+  tfoot td:last-child { border-bottom-right-radius: 10px; }
+
+  .cell { display: flex; align-items: center; justify-content: center; min-height: 40px; padding: 6px; width: 100%; height: 100%;
+          font: inherit; color: inherit; background: none; border: 0; }
+  td.s-ok { background: var(--ok-bg); }
+  td.s-wait { background: var(--wait-bg); }
+  td.s-late { background: var(--late-bg); }
+  .ok { color: var(--ok); display: inline-flex; }
+  .wait { color: var(--wait); font-weight: 600; font-size: .9rem; white-space: nowrap; }
+  .late { color: var(--late); font-weight: 600; font-size: .9rem; white-space: nowrap; }
+  .tbd { color: var(--tbd); font-size: .85rem; letter-spacing: .03em; }
+  .sw { width: 14px; height: 14px; border-radius: 3px; display: inline-block; border: 1px solid var(--line); }
+
+  body.editing td .cell { cursor: pointer; }
+  body.editing td .cell:hover { outline: 2px solid var(--focus); outline-offset: -3px; border-radius: 4px; }
+  td.changed { box-shadow: inset 0 0 0 2px var(--focus); }
+  .cell:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  section.notes { margin-top: 24px; }
+  section.notes h2 { font-size: 1rem; margin: 0 0 8px; }
+  section.notes ul { margin: 0; padding-left: 20px; color: var(--ink); }
+  section.notes li { margin: 4px 0; }
+  #notesEdit { width: 100%; min-height: 140px; font: inherit; color: var(--ink); background: var(--surface);
+               border: 1px solid var(--line); border-radius: 8px; padding: 10px; display: none; }
+  body.editing #notesEdit { display: block; }
+  body.editing #notesList { display: none; }
+  .hint { font-size: .82rem; color: var(--muted); margin: 6px 0 0; display: none; }
+  body.editing .hint { display: block; }
+
+  .bar {
+    position: sticky; top: 0; z-index: 5; display: none; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    background: var(--bar-bg); color: var(--bar-ink); padding: 10px 16px;
+  }
+  body.editing .bar { display: flex; }
+  .bar p { margin: 0; font-size: .9rem; }
+  .bar .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  button.btn {
+    font: inherit; font-size: .88rem; font-weight: 600; border-radius: 8px; padding: 7px 14px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  }
+  button.btn.primary { background: var(--ok); border-color: var(--ok); color: #fff; }
+  button.btn.ghost { background: transparent; border-color: currentColor; color: inherit; }
+  button.btn:disabled { opacity: .55; cursor: default; }
+  .edit-entry { margin-top: 28px; text-align: right; display: none; }
+  .edit-entry.show { display: block; }
+
+  dialog {
+    border: 1px solid var(--line); border-radius: 12px; padding: 0; width: min(440px, calc(100vw - 32px));
+    background: var(--surface); color: var(--ink); box-shadow: 0 12px 40px rgba(0,0,0,.25);
+  }
+  dialog::backdrop { background: rgba(10,14,22,.45); }
+  .dlg { padding: 18px 18px 16px; }
+  .dlg h3 { margin: 0 0 2px; font-size: 1.05rem; }
+  .dlg .ctx { margin: 0 0 14px; color: var(--muted); font-size: .88rem; }
+  .choices { display: grid; gap: 8px; }
+  .choice { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; padding: 10px 12px; border-radius: 8px;
+            border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; }
+  .choice:hover { border-color: var(--focus); }
+  .choice.current { border-color: var(--focus); box-shadow: inset 0 0 0 1px var(--focus); }
+  .daterow { display: flex; gap: 8px; align-items: center; }
+  .daterow input { flex: 1; font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); min-width: 0; }
+  .dlg .foot { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
+  .dlg ol { padding-left: 20px; margin: 8px 0 12px; font-size: .88rem; }
+  .dlg ol li { margin: 3px 0; }
+  .dlg input[type=password] { width: 100%; font: inherit; padding: 9px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+  .dlg .small { font-size: .8rem; color: var(--muted); margin: 8px 0 0; }
+
+  .toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: var(--surface);
+           padding: 10px 16px; border-radius: 8px; font-size: .9rem; box-shadow: var(--shadow); display: none; max-width: calc(100vw - 32px); z-index: 20; }
+  .toast.show { display: block; }
+  .toast.err { background: var(--late); color: #fff; }
+  .loading { padding: 40px; text-align: center; color: var(--muted); }
+  @media (max-width: 600px) {
+    main { padding-top: 20px; }
+    header h1 { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="bar" role="region" aria-label="Mode modification">
+  <p>Mode modification : cliquez une case pour changer son état.</p>
+  <div class="actions">
+    <button class="btn primary" id="btnSave" disabled>Enregistrer</button>
+    <button class="btn ghost" id="btnCancel">Quitter</button>
+    <button class="btn ghost" id="btnForget" title="Retirer le jeton GitHub de ce navigateur">Oublier le jeton</button>
+  </div>
+</div>
+
+<main>
+  <header>
+    <h1 id="titre">Suivi</h1>
+    <p class="sub" id="sousTitre"></p>
+  </header>
+
+  <div class="meta" id="meta"></div>
+
+  <div class="legend" aria-label="Légende">
+    <span><span class="ok" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> remis / validé</span>
+    <span><span class="sw" style="background:var(--wait-bg)"></span> en attente (date de remise prévue)</span>
+    <span><span class="sw" style="background:var(--late-bg)"></span> date dépassée</span>
+    <span><span class="tbd">TBD</span> date à déterminer</span>
+  </div>
+
+  <div class="card">
+    <div class="table-wrap">
+      <table id="grille"><tbody><tr><td class="loading">Chargement…</td></tr></tbody></table>
+    </div>
+  </div>
+
+  <section class="notes">
+    <h2>Notes</h2>
+    <ul id="notesList"></ul>
+    <textarea id="notesEdit" aria-label="Notes (une par ligne)"></textarea>
+    <p class="hint">Une note par ligne.</p>
+  </section>
+
+  <div class="edit-entry" id="editEntry"><button class="btn" id="btnEdit">Modifier</button></div>
+</main>
+
+<dialog id="dlgCell">
+  <form method="dialog" class="dlg" id="formCell">
+    <h3 id="cellTitle"></h3>
+    <p class="ctx" id="cellCtx"></p>
+    <div class="choices">
+      <button type="button" class="choice" data-val="ok"><span class="ok"><svg width="18" height="18" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Remis / validé</button>
+      <div class="choice" data-val="date" style="cursor:default">
+        <span style="white-space:nowrap">Date de remise</span>
+        <div class="daterow" style="flex:1">
+          <input type="date" id="cellDate" aria-label="Date de remise">
+          <button type="button" class="btn" id="btnDate">OK</button>
+        </div>
+      </div>
+      <button type="button" class="choice" data-val="tbd"><span class="tbd">TBD</span> Date à déterminer</button>
+    </div>
+    <div class="foot"><button class="btn" value="cancel">Fermer</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlgToken">
+  <form method="dialog" class="dlg" id="formToken">
+    <h3>Jeton GitHub</h3>
+    <p class="ctx">Pour enregistrer, la page écrit dans le dépôt <strong id="repoName"></strong> avec un jeton personnel. Il reste dans ce navigateur seulement.</p>
+    <ol>
+      <li>GitHub → Settings → Developer settings → Personal access tokens → <em>Fine-grained tokens</em> → Generate new token.</li>
+      <li>Repository access : <em>Only select repositories</em> → ce dépôt seulement.</li>
+      <li>Permissions → Repository → <em>Contents : Read and write</em>.</li>
+      <li>Copiez le jeton et collez-le ici.</li>
+    </ol>
+    <input type="password" id="tokenInput" placeholder="github_pat_…" autocomplete="off" spellcheck="false">
+    <p class="small">Ne partagez pas ce jeton. Vous pourrez le retirer avec « Oublier le jeton ».</p>
+    <div class="foot">
+      <button class="btn" value="cancel">Annuler</button>
+      <button class="btn primary" id="btnTokenOk" value="ok">Continuer</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  // ---- Configuration (déduite de l'adresse GitHub Pages; valeurs de secours ci-dessous) ----
+  const CONFIG = { owner: "JulienMiron", repo: "suivi-prob-stat", branch: "main", path: "suivi.json" };
+  if (location.hostname.endsWith(".github.io")) {
+    CONFIG.owner = location.hostname.split(".")[0];
+    const seg = location.pathname.split("/").filter(Boolean);
+    CONFIG.repo = seg.length && !/\.html?$/.test(seg[0]) ? seg[0] : CONFIG.owner + ".github.io";
+  }
+  const API = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.path}`;
+  const TOKEN_KEY = `suivi-token:${CONFIG.owner}/${CONFIG.repo}`;
+
+  const $ = (s) => document.querySelector(s);
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); return true; } catch { return false; } },
+    del(k) { try { localStorage.removeItem(k); } catch {} }
+  };
+
+  let data = null;      // état enregistré
+  let draft = null;     // état en cours de modification
+  let editing = false;
+  let cur = null;       // {r, c} case ouverte
+
+  const CHECK = '<svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const isDate = (v) => /^\d{4}-\d{2}-\d{2}$/.test(v);
+  const toDate = (v) => { const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
+  const today = () => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); };
+  const fmtShort = (v) => toDate(v).toLocaleDateString("fr-CA", { day: "numeric", month: "short" });
+  const fmtLong = (v) => toDate(v).toLocaleDateString("fr-CA", { day: "numeric", month: "long", year: "numeric" });
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const clone = (o) => JSON.parse(JSON.stringify(o));
+
+  function toast(msg, err = false, ms = 3800) {
+    const t = $("#toast"); t.textContent = msg; t.className = "toast show" + (err ? " err" : "");
+    clearTimeout(toast._t); toast._t = setTimeout(() => (t.className = "toast"), ms);
+  }
+
+  function cellHTML(v, label) {
+    if (v === "ok") return { cls: "s-ok", html: `<span class="ok" title="Remis">${CHECK}</span>`, aria: `${label} : remis` };
+    if (isDate(v)) {
+      const late = toDate(v) < today();
+      return {
+        cls: late ? "s-late" : "s-wait",
+        html: `<span class="${late ? "late" : "wait"}" title="${late ? "Date dépassée : " : "Remise prévue le "}${fmtLong(v)}">${fmtShort(v)}</span>`,
+        aria: `${label} : ${late ? "date dépassée, " : "en attente, "}${fmtLong(v)}`
+      };
+    }
+    return { cls: "", html: `<span class="tbd">TBD</span>`, aria: `${label} : date à déterminer` };
+  }
+
+  function render() {
+    const d = editing ? draft : data;
+    document.title = "Suivi — " + d.titre;
+    $("#titre").textContent = d.titre;
+    $("#sousTitre").textContent = d.sousTitre || "";
+
+    // Synthèse
+    const pending = [];
+    d.lignes.forEach((l) => l.etats.forEach((v, j) => { if (isDate(v)) pending.push({ nom: l.nom, col: d.colonnes[j], v }); }));
+    pending.sort((a, b) => a.v.localeCompare(b.v));
+    const late = pending.filter((p) => toDate(p.v) < today());
+    const meta = [];
+    if (d.misAJour && isDate(d.misAJour)) meta.push(`Mis à jour le <strong>${fmtLong(d.misAJour)}</strong>`);
+    if (pending.length) {
+      const n = pending[0];
+      meta.push(`${pending.length} remise${pending.length > 1 ? "s" : ""} en attente · prochaine : <strong>${esc(n.nom)}, ${esc(n.col.toLowerCase())}</strong> (${fmtLong(n.v)})`);
+    } else meta.push("Aucune remise datée en attente");
+    if (late.length) meta.push(`<strong style="color:var(--late)">${late.length} en retard</strong>`);
+    $("#meta").innerHTML = meta.map((m) => `<span>${m}</span>`).join("");
+
+    // Tableau
+    let h = "<thead><tr><th scope='col'>Chapitre</th>";
+    d.colonnes.forEach((c) => (h += `<th scope="col">${esc(c)}</th>`));
+    h += "</tr></thead><tbody>";
+    d.lignes.forEach((l, r) => {
+      h += `<tr><th scope="row">${esc(l.nom)}</th>`;
+      l.etats.forEach((v, c) => {
+        const x = cellHTML(v, `${l.nom}, ${d.colonnes[c]}`);
+        const changed = editing && data.lignes[r] && data.lignes[r].etats[c] !== v;
+        const inner = editing
+          ? `<button type="button" class="cell" data-r="${r}" data-c="${c}" aria-label="${esc(x.aria)} — modifier">${x.html}</button>`
+          : `<div class="cell" aria-label="${esc(x.aria)}">${x.html}</div>`;
+        h += `<td class="${x.cls}${changed ? " changed" : ""}">${inner}</td>`;
+      });
+      h += "</tr>";
+    });
+    h += "</tbody><tfoot><tr><th scope='row'>Remis</th>";
+    d.colonnes.forEach((_, c) => {
+      const n = d.lignes.filter((l) => l.etats[c] === "ok").length;
+      h += `<td>${n} / ${d.lignes.length}</td>`;
+    });
+    h += "</tr></tfoot>";
+    $("#grille").innerHTML = h;
+
+    // Notes
+    $("#notesList").innerHTML = (d.notes || []).map((n) => `<li>${esc(n)}</li>`).join("") || "<li style='color:var(--muted)'>Aucune note.</li>";
+    if (editing && document.activeElement !== $("#notesEdit")) $("#notesEdit").value = (draft.notes || []).join("\n");
+
+    updateSave();
+  }
+
+  function changesCount() {
+    if (!editing) return 0;
+    let n = 0;
+    draft.lignes.forEach((l, r) => l.etats.forEach((v, c) => { if (data.lignes[r].etats[c] !== v) n++; }));
+    if (JSON.stringify(draft.notes || []) !== JSON.stringify(data.notes || [])) n++;
+    return n;
+  }
+  function updateSave() {
+    const n = changesCount();
+    const b = $("#btnSave");
+    b.disabled = n === 0;
+    b.textContent = n ? `Enregistrer (${n})` : "Enregistrer";
+  }
+
+  // ---- Chargement ----
+  async function charger() {
+    const token = store.get(TOKEN_KEY);
+    try {
+      const r = await fetch(`${API}?ref=${CONFIG.branch}`, {
+        cache: "no-store",
+        headers: Object.assign({ Accept: "application/vnd.github.raw+json" }, token ? { Authorization: `Bearer ${token}` } : {})
+      });
+      if (!r.ok) throw new Error(r.status);
+      return await r.json();
+    } catch {
+      const r = await fetch(`${CONFIG.path}?v=${Date.now()}`, { cache: "no-store" });
+      if (!r.ok) throw new Error("Données introuvables");
+      return await r.json();
+    }
+  }
+
+  // ---- Jeton ----
+  function demanderJeton() {
+    return new Promise((resolve) => {
+      const dlg = $("#dlgToken");
+      $("#repoName").textContent = `${CONFIG.owner}/${CONFIG.repo}`;
+      $("#tokenInput").value = "";
+      dlg.onclose = () => {
+        const v = $("#tokenInput").value.trim();
+        if (dlg.returnValue === "ok" && v) { store.set(TOKEN_KEY, v); resolve(v); } else resolve(null);
+      };
+      dlg.showModal();
+      setTimeout(() => $("#tokenInput").focus(), 30);
+    });
+  }
+
+  // ---- Enregistrement ----
+  function b64utf8(str) {
+    const bytes = new TextEncoder().encode(str);
+    let bin = ""; for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    return btoa(bin);
+  }
+  async function enregistrer() {
+    syncNotes();
+    if (!changesCount()) return;
+    let token = store.get(TOKEN_KEY) || (await demanderJeton());
+    if (!token) return;
+    const btn = $("#btnSave"); btn.disabled = true; btn.textContent = "Enregistrement…";
+    const auth = { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" };
+    try {
+      const g = await fetch(`${API}?ref=${CONFIG.branch}`, { headers: auth, cache: "no-store" });
+      if (g.status === 401) throw Object.assign(new Error("Jeton refusé (expiré ou invalide)."), { code: 401 });
+      if (!g.ok) throw new Error(g.status === 404 ? "Dépôt ou fichier introuvable avec ce jeton : vérifiez qu'il donne accès à ce dépôt." : `Lecture impossible (${g.status}).`);
+      const meta = await g.json();
+      const out = clone(draft);
+      const t = new Date();
+      out.misAJour = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, "0")}-${String(t.getDate()).padStart(2, "0")}`;
+      const p = await fetch(API, {
+        method: "PUT", headers: Object.assign({ "Content-Type": "application/json" }, auth),
+        body: JSON.stringify({ message: `Mise à jour du suivi (${out.misAJour})`, content: b64utf8(JSON.stringify(out, null, 2) + "\n"), sha: meta.sha, branch: CONFIG.branch })
+      });
+      if (p.status === 401) throw Object.assign(new Error("Jeton refusé (expiré ou invalide)."), { code: 401 });
+      if (p.status === 403 || p.status === 404) throw new Error("Ce jeton n'a pas le droit d'écrire dans le dépôt (permission Contents : Read and write).");
+      if (p.status === 409) throw new Error("Le fichier a changé entre-temps. Rechargez la page et recommencez.");
+      if (!p.ok) throw new Error(`Enregistrement impossible (${p.status}).`);
+      data = out; draft = clone(out);
+      render();
+      toast("Enregistré. Les changements sont visibles pour tous dès maintenant.");
+    } catch (e) {
+      if (e.code === 401) store.del(TOKEN_KEY);
+      toast(e.message || "Erreur réseau.", true, 6000);
+      updateSave();
+    }
+  }
+
+  // ---- Modification ----
+  function entrerEdition() {
+    editing = true; draft = clone(data);
+    document.body.classList.add("editing");
+    store.set("suivi-editeur", "1");
+    render();
+  }
+  function quitterEdition() {
+    syncNotes();
+    if (changesCount() && !confirm("Abandonner les changements non enregistrés ?")) return;
+    editing = false; draft = null;
+    document.body.classList.remove("editing");
+    render();
+  }
+  function syncNotes() {
+    if (!editing) return;
+    draft.notes = $("#notesEdit").value.split("\n").map((s) => s.trim()).filter(Boolean);
+  }
+
+  function ouvrirCase(r, c) {
+    cur = { r, c };
+    const l = draft.lignes[r], v = l.etats[c];
+    $("#cellTitle").textContent = l.nom;
+    $("#cellCtx").textContent = draft.colonnes[c];
+    document.querySelectorAll("#dlgCell .choice").forEach((b) => {
+      const k = b.dataset.val;
+      b.classList.toggle("current", (k === "date" && isDate(v)) || k === v);
+    });
+    $("#cellDate").value = isDate(v) ? v : "";
+    $("#dlgCell").showModal();
+  }
+  function poser(v) {
+    if (!cur) return;
+    draft.lignes[cur.r].etats[cur.c] = v;
+    $("#dlgCell").close();
+    render();
+    const btn = document.querySelector(`.cell[data-r="${cur.r}"][data-c="${cur.c}"]`);
+    if (btn) btn.focus();
+  }
+
+  // ---- Événements ----
+  $("#grille").addEventListener("click", (e) => {
+    const b = e.target.closest("button.cell"); if (!b || !editing) return;
+    ouvrirCase(+b.dataset.r, +b.dataset.c);
+  });
+  document.querySelectorAll("#dlgCell button.choice").forEach((b) => b.addEventListener("click", () => poser(b.dataset.val)));
+  $("#btnDate").addEventListener("click", () => {
+    const v = $("#cellDate").value;
+    if (!isDate(v)) { $("#cellDate").focus(); return; }
+    poser(v);
+  });
+  $("#cellDate").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); $("#btnDate").click(); } });
+  $("#notesEdit").addEventListener("input", () => { syncNotes(); updateSave(); });
+  $("#btnEdit").addEventListener("click", entrerEdition);
+  $("#btnCancel").addEventListener("click", quitterEdition);
+  $("#btnSave").addEventListener("click", enregistrer);
+  $("#btnForget").addEventListener("click", () => { store.del(TOKEN_KEY); store.del("suivi-editeur"); toast("Jeton retiré de ce navigateur."); });
+  window.addEventListener("beforeunload", (e) => { if (editing && changesCount()) { e.preventDefault(); e.returnValue = ""; } });
+
+  // Le bouton « Modifier » n'apparaît que pour l'auteur : adresse avec ?modifier, ou navigateur déjà utilisé pour modifier.
+  const params = new URLSearchParams(location.search);
+  if (params.has("modifier") || store.get(TOKEN_KEY) || store.get("suivi-editeur")) $("#editEntry").classList.add("show");
+
+  charger()
+    .then((d) => { data = d; render(); if (params.has("modifier")) entrerEdition(); })
+    .catch(() => { $("#grille").innerHTML = "<tbody><tr><td class='loading'>Impossible de charger les données.</td></tr></tbody>"; });
+})();
+</script>
+</body>
+</html>

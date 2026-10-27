@@ -1,0 +1,34 @@
+{
+  "titre": "Probabilités et statistique pour ingénieurs, 4e édition",
+  "sousTitre": "Suivi des remises auteurs",
+  "misAJour": "2026-10-27",
+  "colonnes": [
+    "V1 (manuscrit)",
+    "V2 (version consultée)",
+    "Révision linguistique",
+    "Épreuve 1 corrigée",
+    "Réponses aux exercices",
+    "Épreuves 2 et 3",
+    "Approbation finale"
+  ],
+  "lignes": [
+    { "nom": "Chapitre 1",  "etats": ["ok", "ok", "ok", "ok", "ok", "tbd", "tbd"] },
+    { "nom": "Chapitre 2",  "etats": ["ok", "ok", "ok", "ok", "ok", "tbd", "tbd"] },
+    { "nom": "Chapitre 3",  "etats": ["ok", "ok", "ok", "ok", "ok", "tbd", "tbd"] },
+    { "nom": "Chapitre 4",  "etats": ["ok", "ok", "ok", "ok", "ok", "tbd", "tbd"] },
+    { "nom": "Chapitre 5",  "etats": ["ok", "ok", "ok", "ok", "ok", "tbd", "tbd"] },
+    { "nom": "Chapitre 6",  "etats": ["ok", "ok", "ok", "ok", "ok", "tbd", "tbd"] },
+    { "nom": "Chapitre 7",  "etats": ["ok", "ok", "ok", "ok", "ok", "tbd", "tbd"] },
+    { "nom": "Chapitre 8",  "etats": ["ok", "ok", "ok", "ok", "ok", "tbd", "tbd"] },
+    { "nom": "Chapitre 9",  "etats": ["ok", "ok", "ok", "2026-11-06", "2026-11-06", "tbd", "tbd"] },
+    { "nom": "Chapitre 10", "etats": ["ok", "ok", "ok", "tbd", "tbd", "tbd", "tbd"] },
+    { "nom": "Chapitre 11", "etats": ["ok", "ok", "tbd", "tbd", "tbd", "tbd", "tbd"] },
+    { "nom": "Chapitre 12", "etats": ["ok", "ok", "tbd", "tbd", "tbd", "tbd", "tbd"] }
+  ],
+  "notes": [
+    "Chapitre 9 : épreuve 1 corrigée et réponses aux exercices reçues le 26 octobre, retour prévu le 6 novembre.",
+    "Chapitre 12 : V2 consultée retournée le 26 octobre (date prévue : 9 novembre).",
+    "Annexes : directives remises le 6 octobre (retrait des annexes I et IX).",
+    "Épreuves 2 et 3 et approbation finale : étapes de l'échéancier initial (approbation finale visée en février 2027, parution en mars 2027)."
+  ]
+}
