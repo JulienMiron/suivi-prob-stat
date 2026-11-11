@@ -15,6 +15,7 @@
     --head: #1f3864;
     --head-ink: #ffffff;
     --ok: #1e8e3e;
+    --ok-ink: #146c2e;
     --ok-bg: #e6f4ea;
     --wait: #7a5a00;
     --wait-bg: #fff2cc;
@@ -30,7 +31,7 @@
     :root:not([data-theme="light"]) {
       --bg: #12151c; --surface: #1a1f2a; --ink: #e7e9ee; --muted: #9aa3b2; --line: #2c3342;
       --head: #2a3f6b; --head-ink: #f2f4f8;
-      --ok: #5fd27e; --ok-bg: #173323; --wait: #f2cf6b; --wait-bg: #3a3014;
+      --ok: #5fd27e; --ok-ink: #8fe0a5; --ok-bg: #173323; --wait: #f2cf6b; --wait-bg: #3a3014;
       --late: #ff8a7a; --late-bg: #3d1b18; --tbd: #6b7487; --accent: #8fb0f0; --focus: #8fb0f0; --bar-bg: #2a3f6b; --bar-ink: #f2f4f8;
       --shadow: 0 1px 2px rgba(0,0,0,.4);
     }
@@ -38,7 +39,7 @@
   :root[data-theme="dark"] {
     --bg: #12151c; --surface: #1a1f2a; --ink: #e7e9ee; --muted: #9aa3b2; --line: #2c3342;
     --head: #2a3f6b; --head-ink: #f2f4f8;
-    --ok: #5fd27e; --ok-bg: #173323; --wait: #f2cf6b; --wait-bg: #3a3014;
+    --ok: #5fd27e; --ok-ink: #8fe0a5; --ok-bg: #173323; --wait: #f2cf6b; --wait-bg: #3a3014;
     --late: #ff8a7a; --late-bg: #3d1b18; --tbd: #6b7487; --accent: #8fb0f0; --focus: #8fb0f0; --bar-bg: #2a3f6b; --bar-ink: #f2f4f8;
     --shadow: 0 1px 2px rgba(0,0,0,.4);
   }
@@ -58,7 +59,7 @@
 
   .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); }
   .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 10px; }
-  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 760px; }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 880px; }
   th, td { text-align: center; padding: 0; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
   th:last-child, td:last-child { border-right: 0; }
   thead th {
@@ -82,6 +83,10 @@
   td.s-wait { background: var(--wait-bg); }
   td.s-late { background: var(--late-bg); }
   .ok { color: var(--ok); display: inline-flex; }
+  .okc { display: flex; flex-direction: column; align-items: center; gap: 1px; line-height: 1.2; }
+  .okl { display: inline-flex; align-items: center; gap: 3px; color: var(--ok-ink); font-weight: 600; font-size: .8rem; white-space: nowrap; }
+  .okl .ok { color: var(--ok); }
+  .okp { font-size: .75rem; color: var(--ink); opacity: .8; white-space: nowrap; }
   .wait { color: var(--wait); font-weight: 600; font-size: .9rem; white-space: nowrap; }
   .late { color: var(--late); font-weight: 600; font-size: .9rem; white-space: nowrap; }
   .tbd { color: var(--tbd); font-size: .85rem; letter-spacing: .03em; }
@@ -135,7 +140,10 @@
   .choice:hover { border-color: var(--focus); }
   .choice.current { border-color: var(--focus); box-shadow: inset 0 0 0 1px var(--focus); }
   .daterow { display: flex; gap: 8px; align-items: center; }
-  .daterow input { flex: 1; font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); min-width: 0; }
+  .daterow input, .daterow select { flex: 1; font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); min-width: 0; }
+  .daterow select { flex: 0 1 auto; }
+  .choice.stack { flex-wrap: wrap; cursor: default; }
+  .choice.stack .daterow { flex-basis: 100%; }
   .dlg .foot { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
   .dlg ol { padding-left: 20px; margin: 8px 0 12px; font-size: .88rem; }
   .dlg ol li { margin: 3px 0; }
@@ -172,7 +180,7 @@
   <div class="meta" id="meta"></div>
 
   <div class="legend" aria-label="Légende">
-    <span><span class="ok" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> remis / validé</span>
+    <span><span class="ok" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> remis, avec la date d'envoi et qui l'a envoyé</span>
     <span><span class="sw" style="background:var(--wait-bg)"></span> en attente (date de remise prévue)</span>
     <span><span class="sw" style="background:var(--late-bg)"></span> date dépassée</span>
     <span><span class="tbd">TBD</span> date à déterminer</span>
@@ -199,7 +207,15 @@
     <h3 id="cellTitle"></h3>
     <p class="ctx" id="cellCtx"></p>
     <div class="choices">
-      <button type="button" class="choice" data-val="ok"><span class="ok"><svg width="18" height="18" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Remis / validé</button>
+      <div class="choice stack" data-val="ok">
+        <span class="ok"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>Remis : date d'envoi et expéditeur</span>
+        <div class="daterow">
+          <input type="date" id="okDate" aria-label="Date d'envoi">
+          <select id="okPar" aria-label="Envoyé par"></select>
+          <button type="button" class="btn" id="btnOk">OK</button>
+        </div>
+      </div>
       <div class="choice" data-val="date" style="cursor:default">
         <span style="white-space:nowrap">Date de remise</span>
         <div class="daterow" style="flex:1">
@@ -259,11 +275,21 @@
   let cur = null;       // {r, c} case ouverte
 
   const CHECK = '<svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  const isDate = (v) => /^\d{4}-\d{2}-\d{2}$/.test(v);
+  const CHECK_SM = CHECK.replace(/width="18" height="18"/, 'width="14" height="14"');
+  const isDate = (v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v);
+  // Remis : "ok" (ancien format) ou {"ok": "AAAA-MM-JJ", "par": "Julien"}
+  const isOk = (v) => v === "ok" || (!!v && typeof v === "object" && "ok" in v);
+  const okDate = (v) => (v && typeof v === "object" && isDate(v.ok) ? v.ok : null);
+  const okPar = (v) => (v && typeof v === "object" && v.par ? String(v.par) : "");
+  const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+  const auteurs = (d) => (Array.isArray(d.auteurs) && d.auteurs.length ? d.auteurs : ["Julien", "Aurélien"]);
   const toDate = (v) => { const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
   const today = () => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); };
   const fmtShort = (v) => toDate(v).toLocaleDateString("fr-CA", { day: "numeric", month: "short" });
   const fmtLong = (v) => toDate(v).toLocaleDateString("fr-CA", { day: "numeric", month: "long", year: "numeric" });
+  // Date courte, avec l'année seulement si elle diffère de l'année en cours
+  const fmtCell = (v) => toDate(v).getFullYear() === today().getFullYear() ? fmtShort(v)
+    : toDate(v).toLocaleDateString("fr-CA", { day: "numeric", month: "short", year: "numeric" });
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const clone = (o) => JSON.parse(JSON.stringify(o));
 
@@ -273,7 +299,16 @@
   }
 
   function cellHTML(v, label) {
-    if (v === "ok") return { cls: "s-ok", html: `<span class="ok" title="Remis">${CHECK}</span>`, aria: `${label} : remis` };
+    if (isOk(v)) {
+      const dt = okDate(v), par = okPar(v);
+      if (!dt && !par) return { cls: "s-ok", html: `<span class="ok" title="Remis">${CHECK}</span>`, aria: `${label} : remis` };
+      const txt = `Remis${dt ? " le " + fmtLong(dt) : ""}${par ? " par " + par : ""}`;
+      return {
+        cls: "s-ok",
+        html: `<span class="okc" title="${esc(txt)}"><span class="okl"><span class="ok">${CHECK_SM}</span>${dt ? esc(fmtCell(dt)) : "Remis"}</span>${par ? `<span class="okp">${esc(par)}</span>` : ""}</span>`,
+        aria: `${label} : ${txt.toLowerCase()}`
+      };
+    }
     if (isDate(v)) {
       const late = toDate(v) < today();
       return {
@@ -303,6 +338,12 @@
       meta.push(`${pending.length} remise${pending.length > 1 ? "s" : ""} en attente · prochaine : <strong>${esc(n.nom)}, ${esc(n.col.toLowerCase())}</strong> (${fmtLong(n.v)})`);
     } else meta.push("Aucune remise datée en attente");
     if (late.length) meta.push(`<strong style="color:var(--late)">${late.length} en retard</strong>`);
+    let dernier = null;
+    d.lignes.forEach((l) => l.etats.forEach((v, j) => {
+      const dt = okDate(v);
+      if (dt && (!dernier || dt > dernier.dt)) dernier = { nom: l.nom, col: d.colonnes[j], dt, par: okPar(v) };
+    }));
+    if (dernier) meta.push(`Dernier envoi : <strong>${esc(dernier.nom)}, ${esc(dernier.col.toLowerCase())}</strong> (${fmtLong(dernier.dt)}${dernier.par ? ", " + esc(dernier.par) : ""})`);
     $("#meta").innerHTML = meta.map((m) => `<span>${m}</span>`).join("");
 
     // Tableau
@@ -313,7 +354,7 @@
       h += `<tr><th scope="row">${esc(l.nom)}</th>`;
       l.etats.forEach((v, c) => {
         const x = cellHTML(v, `${l.nom}, ${d.colonnes[c]}`);
-        const changed = editing && data.lignes[r] && data.lignes[r].etats[c] !== v;
+        const changed = editing && data.lignes[r] && !same(data.lignes[r].etats[c], v);
         const inner = editing
           ? `<button type="button" class="cell" data-r="${r}" data-c="${c}" aria-label="${esc(x.aria)} — modifier">${x.html}</button>`
           : `<div class="cell" aria-label="${esc(x.aria)}">${x.html}</div>`;
@@ -323,7 +364,7 @@
     });
     h += "</tbody><tfoot><tr><th scope='row'>Remis</th>";
     d.colonnes.forEach((_, c) => {
-      const n = d.lignes.filter((l) => l.etats[c] === "ok").length;
+      const n = d.lignes.filter((l) => isOk(l.etats[c])).length;
       h += `<td>${n} / ${d.lignes.length}</td>`;
     });
     h += "</tr></tfoot>";
@@ -339,7 +380,7 @@
   function changesCount() {
     if (!editing) return 0;
     let n = 0;
-    draft.lignes.forEach((l, r) => l.etats.forEach((v, c) => { if (data.lignes[r].etats[c] !== v) n++; }));
+    draft.lignes.forEach((l, r) => l.etats.forEach((v, c) => { if (!same(data.lignes[r].etats[c], v)) n++; }));
     if (JSON.stringify(draft.notes || []) !== JSON.stringify(data.notes || [])) n++;
     return n;
   }
@@ -447,9 +488,18 @@
     $("#cellCtx").textContent = draft.colonnes[c];
     document.querySelectorAll("#dlgCell .choice").forEach((b) => {
       const k = b.dataset.val;
-      b.classList.toggle("current", (k === "date" && isDate(v)) || k === v);
+      b.classList.toggle("current", (k === "date" && isDate(v)) || (k === "ok" && isOk(v)) || k === v);
     });
     $("#cellDate").value = isDate(v) ? v : "";
+    // Remis : date d'envoi (aujourd'hui par défaut) et expéditeur (dernier choisi par défaut)
+    const t = new Date();
+    const auj = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, "0")}-${String(t.getDate()).padStart(2, "0")}`;
+    $("#okDate").value = okDate(v) || auj;
+    const noms = auteurs(draft).slice();
+    const par = isOk(v) ? okPar(v) : (store.get("suivi-par") || noms[0]);
+    if (par && !noms.includes(par)) noms.push(par);
+    $("#okPar").innerHTML = noms.map((n) => `<option value="${esc(n)}">${esc(n)}</option>`).join("") + `<option value="">(non précisé)</option>`;
+    $("#okPar").value = par;
     $("#dlgCell").showModal();
   }
   function poser(v) {
@@ -473,6 +523,13 @@
     poser(v);
   });
   $("#cellDate").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); $("#btnDate").click(); } });
+  $("#btnOk").addEventListener("click", () => {
+    const dt = $("#okDate").value, par = $("#okPar").value;
+    if (!isDate(dt)) { $("#okDate").focus(); return; }
+    if (par) store.set("suivi-par", par);
+    poser(par ? { ok: dt, par } : { ok: dt });
+  });
+  $("#okDate").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); $("#btnOk").click(); } });
   $("#notesEdit").addEventListener("input", () => { syncNotes(); updateSave(); });
   $("#btnEdit").addEventListener("click", entrerEdition);
   $("#btnCancel").addEventListener("click", quitterEdition);

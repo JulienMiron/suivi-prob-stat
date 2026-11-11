@@ -2,6 +2,10 @@
   "titre": "Probabilités et statistique pour ingénieurs, 4e édition",
   "sousTitre": "Suivi des remises auteurs",
   "misAJour": "2026-11-11",
+  "auteurs": [
+    "Julien",
+    "Aurélien"
+  ],
   "colonnes": [
     "V1 (manuscrit)",
     "V2 (version consultée)",
@@ -16,12 +20,30 @@
     {
       "nom": "Chapitre 1",
       "etats": [
-        "ok",
-        "ok",
-        "ok",
-        "ok",
-        "ok",
-        "ok",
+        {
+          "ok": "2025-10-31",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-03-03",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-04-01",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-07-14",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-07-15",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-11-10",
+          "par": "Julien"
+        },
         "tbd",
         "tbd"
       ]
@@ -29,11 +51,26 @@
     {
       "nom": "Chapitre 2",
       "etats": [
-        "ok",
-        "ok",
-        "ok",
-        "ok",
-        "ok",
+        {
+          "ok": "2025-12-19",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-03-16",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-04-24",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-07-22",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-07-15",
+          "par": "Aurélien"
+        },
         "tbd",
         "tbd",
         "tbd"
@@ -42,11 +79,26 @@
     {
       "nom": "Chapitre 3",
       "etats": [
-        "ok",
-        "ok",
-        "ok",
-        "ok",
-        "ok",
+        {
+          "ok": "2025-12-19",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-03-30",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-05-01",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-08-20",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-08-20",
+          "par": "Aurélien"
+        },
         "tbd",
         "tbd",
         "tbd"
@@ -55,11 +107,26 @@
     {
       "nom": "Chapitre 4",
       "etats": [
-        "ok",
-        "ok",
-        "ok",
-        "ok",
-        "ok",
+        {
+          "ok": "2026-02-23",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-04-19",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-05-01",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-08-28",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-08-28",
+          "par": "Aurélien"
+        },
         "tbd",
         "tbd",
         "tbd"
@@ -68,11 +135,26 @@
     {
       "nom": "Chapitre 5",
       "etats": [
-        "ok",
-        "ok",
-        "ok",
-        "ok",
-        "ok",
+        {
+          "ok": "2026-02-23",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-04-26",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-05-19",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-09-11",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-09-11",
+          "par": "Julien"
+        },
         "tbd",
         "tbd",
         "tbd"
@@ -81,11 +163,26 @@
     {
       "nom": "Chapitre 6",
       "etats": [
-        "ok",
-        "ok",
-        "ok",
-        "ok",
-        "ok",
+        {
+          "ok": "2026-04-04",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-05-19",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-07-02",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-09-28",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-09-28",
+          "par": "Julien"
+        },
         "tbd",
         "tbd",
         "tbd"
@@ -94,11 +191,26 @@
     {
       "nom": "Chapitre 7",
       "etats": [
-        "ok",
-        "ok",
-        "ok",
-        "ok",
-        "ok",
+        {
+          "ok": "2026-05-25",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-06-25",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-08-07",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-10-13",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-10-13",
+          "par": "Julien"
+        },
         "tbd",
         "tbd",
         "tbd"
@@ -107,11 +219,26 @@
     {
       "nom": "Chapitre 8",
       "etats": [
-        "ok",
-        "ok",
-        "ok",
-        "ok",
-        "ok",
+        {
+          "ok": "2026-05-25",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-07-16",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-08-17",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-10-26",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-10-26",
+          "par": "Julien"
+        },
         "tbd",
         "tbd",
         "tbd"
@@ -120,11 +247,26 @@
     {
       "nom": "Chapitre 9",
       "etats": [
-        "ok",
-        "ok",
-        "ok",
-        "ok",
-        "ok",
+        {
+          "ok": "2026-07-16",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-08-28",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-09-27",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-10-27",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-10-27",
+          "par": "Julien"
+        },
         "tbd",
         "tbd",
         "tbd"
@@ -133,9 +275,18 @@
     {
       "nom": "Chapitre 10",
       "etats": [
-        "ok",
-        "ok",
-        "ok",
+        {
+          "ok": "2026-07-16",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-09-29",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-10-21",
+          "par": "Aurélien"
+        },
         "tbd",
         "tbd",
         "tbd",
@@ -146,9 +297,18 @@
     {
       "nom": "Chapitre 11",
       "etats": [
-        "ok",
-        "ok",
-        "ok",
+        {
+          "ok": "2026-09-07",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-10-21",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-11-02",
+          "par": "Aurélien"
+        },
         "tbd",
         "tbd",
         "tbd",
@@ -159,8 +319,14 @@
     {
       "nom": "Chapitre 12",
       "etats": [
-        "ok",
-        "ok",
+        {
+          "ok": "2026-09-07",
+          "par": "Aurélien"
+        },
+        {
+          "ok": "2026-10-26",
+          "par": "Julien"
+        },
         "tbd",
         "tbd",
         "tbd",
@@ -171,12 +337,10 @@
     }
   ],
   "notes": [
-    "Chapitre 1 : épreuve 2 et épreuve 1 du corrigé reçues le 9 novembre, retournées le 10 novembre (échéance : 16 novembre).",
+    "Dates sous les crochets : date du courriel (heure de Québec) par lequel Julien ou Aurélien a transmis le fichier à l'éditeur.",
     "Épreuve 2 : en l'absence d'Émeline, Marc-André envoie les épreuves 2 aux auteurs, accompagnées de l'épreuve 1 du corrigé. Formules à refaire : les fournir dans un Word avec MathType.",
     "Envois : désormais adressés à Marc-André, avec Julie Fortin en copie (depuis le 11 novembre).",
-    "Chapitre 12 : V2 consultée retournée le 26 octobre à Émeline seulement ; renvoyée à Marc-André le 11 novembre.",
-    "Chapitre 11 : manuscrit V2 révisé reçu le 30 octobre, retourné le 2 novembre.",
-    "Chapitre 9 : épreuve 1 corrigée et réponses aux exercices retournées le 27 octobre.",
+    "Chapitre 12 : V2 consultée envoyée le 26 octobre à Émeline seulement ; renvoyée à Marc-André le 11 novembre.",
     "Annexes : directives remises le 6 octobre (retrait des annexes I et IX).",
     "Bibliographie : reçue le 9 novembre ; laissée telle quelle, faute de nouvel ouvrage consulté (accord de Julie Fortin le 10 novembre).",
     "Émeline est en congé, date de retour inconnue (avis de Julie Fortin, 4 novembre).",
