@@ -12,6 +12,7 @@
     "Révision linguistique",
     "Épreuve 1 corrigée",
     "Réponses aux exercices",
+    "Validation éditoriale",
     "Épreuve 2 et corrigé",
     "Épreuve 3",
     "Approbation finale"
@@ -40,6 +41,7 @@
           "ok": "2026-07-15",
           "par": "Aurélien"
         },
+        "ok",
         {
           "ok": "2026-11-10",
           "par": "Julien"
@@ -71,6 +73,7 @@
           "ok": "2026-07-15",
           "par": "Aurélien"
         },
+        "ok",
         "tbd",
         "tbd",
         "tbd"
@@ -99,6 +102,7 @@
           "ok": "2026-08-20",
           "par": "Aurélien"
         },
+        "ok",
         "tbd",
         "tbd",
         "tbd"
@@ -127,6 +131,7 @@
           "ok": "2026-08-28",
           "par": "Aurélien"
         },
+        "ok",
         "tbd",
         "tbd",
         "tbd"
@@ -155,6 +160,7 @@
           "ok": "2026-09-11",
           "par": "Julien"
         },
+        "ok",
         "tbd",
         "tbd",
         "tbd"
@@ -183,6 +189,7 @@
           "ok": "2026-09-28",
           "par": "Julien"
         },
+        "ok",
         "tbd",
         "tbd",
         "tbd"
@@ -211,6 +218,10 @@
           "ok": "2026-10-13",
           "par": "Julien"
         },
+        {
+          "ok": "2026-10-15",
+          "par": "Aurélien"
+        },
         "tbd",
         "tbd",
         "tbd"
@@ -237,6 +248,10 @@
         },
         {
           "ok": "2026-10-26",
+          "par": "Julien"
+        },
+        {
+          "ok": "2026-11-11",
           "par": "Julien"
         },
         "tbd",
@@ -269,6 +284,7 @@
         },
         "tbd",
         "tbd",
+        "tbd",
         "tbd"
       ]
     },
@@ -287,6 +303,7 @@
           "ok": "2026-10-21",
           "par": "Aurélien"
         },
+        "tbd",
         "tbd",
         "tbd",
         "tbd",
@@ -313,6 +330,7 @@
         "tbd",
         "tbd",
         "tbd",
+        "tbd",
         "tbd"
       ]
     },
@@ -332,12 +350,15 @@
         "tbd",
         "tbd",
         "tbd",
+        "tbd",
         "tbd"
       ]
     }
   ],
   "notes": [
     "Dates sous les crochets : date du courriel (heure de Québec) par lequel Julien ou Aurélien a transmis le fichier à l'éditeur.",
+    "En attente : chapitre 9, questions de validation éditoriale reçues le 11 novembre (pages 289, 294, 296, 309, 316, 319, 329, 334 et 340), sans date de remise.",
+    "Validation éditoriale (après la validation de l'épreuve 1 par les auteurs) : faite par Émeline pour les chapitres 1 à 7 (crochet sans date ; une seule question aux auteurs, sur l'exemple 7.1, réglée le 15 octobre). Depuis le chapitre 8, Marc-André et Julie s'en chargent et envoient leurs questions aux auteurs ; les formules à retaper se fournissent dans un Word avec MathType.",
     "Épreuve 2 : en l'absence d'Émeline, Marc-André envoie les épreuves 2 aux auteurs, accompagnées de l'épreuve 1 du corrigé. Formules à refaire : les fournir dans un Word avec MathType.",
     "Envois : désormais adressés à Marc-André, avec Julie Fortin en copie (depuis le 11 novembre).",
     "Chapitre 12 : V2 consultée envoyée le 26 octobre à Émeline seulement ; renvoyée à Marc-André le 11 novembre.",

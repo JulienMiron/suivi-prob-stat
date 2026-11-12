@@ -301,7 +301,7 @@
   function cellHTML(v, label) {
     if (isOk(v)) {
       const dt = okDate(v), par = okPar(v);
-      if (!dt && !par) return { cls: "s-ok", html: `<span class="ok" title="Remis">${CHECK}</span>`, aria: `${label} : remis` };
+      if (!dt && !par) return { cls: "s-ok", html: `<span class="ok" title="Fait">${CHECK}</span>`, aria: `${label} : fait` };
       const txt = `Remis${dt ? " le " + fmtLong(dt) : ""}${par ? " par " + par : ""}`;
       return {
         cls: "s-ok",
