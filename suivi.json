@@ -282,7 +282,10 @@
           "ok": "2026-10-27",
           "par": "Julien"
         },
-        "tbd",
+        {
+          "ok": "2026-11-11",
+          "par": "Julien"
+        },
         "tbd",
         "tbd",
         "tbd"
@@ -357,7 +360,7 @@
   ],
   "notes": [
     "Dates sous les crochets : date du courriel (heure de Québec) par lequel Julien ou Aurélien a transmis le fichier à l'éditeur.",
-    "En attente : chapitre 9, questions de validation éditoriale reçues le 11 novembre (pages 289, 294, 296, 309, 316, 319, 329, 334 et 340), sans date de remise.",
+    "Chapitres 8 et 9 : questions de validation éditoriale reçues le 11 novembre ; réponses (PDF annoté et Word) envoyées le soir même.",
     "Validation éditoriale (après la validation de l'épreuve 1 par les auteurs) : faite par Émeline pour les chapitres 1 à 7 (crochet sans date ; une seule question aux auteurs, sur l'exemple 7.1, réglée le 15 octobre). Depuis le chapitre 8, Marc-André et Julie s'en chargent et envoient leurs questions aux auteurs ; les formules à retaper se fournissent dans un Word avec MathType.",
     "Épreuve 2 : en l'absence d'Émeline, Marc-André envoie les épreuves 2 aux auteurs, accompagnées de l'épreuve 1 du corrigé. Formules à refaire : les fournir dans un Word avec MathType.",
     "Envois : désormais adressés à Marc-André, avec Julie Fortin en copie (depuis le 11 novembre).",
